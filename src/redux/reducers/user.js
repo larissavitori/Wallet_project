@@ -5,13 +5,12 @@ const INITIAL_STATE = {
   email: '', // string que armazena o email da pessoa usuária
 };
 
-function UserReducer(state = INITIAL_STATE, action) {
-  // console.log(action.email?.email, 'oi');
-  switch (action.type) {
+function UserReducer(state = INITIAL_STATE, { type, payload }) {
+  switch (type) {
   case ADD_EMAIL:
     return {
-      ...state,
-      email: action.email };
+      email: payload,
+    };
   default:
     return state;
   }
