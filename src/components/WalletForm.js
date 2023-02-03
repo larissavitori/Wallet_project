@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { apiRequest, apiFetch } from '../redux/actions';
+import Table from './Table';
 
 const INITIAL_STATE = {
   id: 0,
@@ -107,6 +108,9 @@ class WalletForm extends Component {
         >
           Adicionar despesa
         </button>
+        <div>
+          <Table />
+        </div>
       </form>
     );
   }
