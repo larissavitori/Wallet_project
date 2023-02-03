@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { REQUEST_API, FAILED_REQUEST } from '../actions/index';
+import { REQUEST_API, FAILED_REQUEST, FORM_REQUEST } from '../actions/index';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -18,7 +18,12 @@ function walletReducer(state = INITIAL_STATE, { type, payload }) {
   case FAILED_REQUEST:
     return {
       ...state,
-      error: action.error,
+      error: payload.error,
+    };
+  case FORM_REQUEST:
+    return {
+      ...state,
+      expenses: [...state.expenses, payload],
     };
   default:
     return state;
