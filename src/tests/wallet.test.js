@@ -1,10 +1,12 @@
 import React from 'react';
-import { screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 // import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux, renderWithRedux } from './helpers/renderWith';
 import Wallet from '../pages/Wallet';
 import WalletForm from '../components/WalletForm';
 import reducers from '../redux/reducers';
+import Header from '../components/Header';
 
 test('Teste se a página contém as informações', () => {
   renderWithRouterAndRedux(<Wallet />);
@@ -22,7 +24,7 @@ test('Teste se a página contém as informações', async () => {
   expect(button.length).toBe(1);
 });
 
-test('test as actions', () => {
+test('teste as actions', () => {
   const initialState = {
     user: { email: 'larytea@gmail.com' },
   };
@@ -35,12 +37,45 @@ test('reducers', () => {
   expect(state).toEqual({ user: { email: 'laryterra@gmail.com' }, wallet: { currencies: ['USD', 'CAD', 'GBP', 'ARS', 'BTC', 'LTC', 'EUR', 'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP', 'DOGE'], expenses: [], editor: false, idToEdit: 0 } });
 });
 
-test('test os inputs', () => {
-  renderWithRedux(<WalletForm />);
+test('teste os inputs', async () => {
+  const { getByTestId } = renderWithRedux(<WalletForm />);
 
   const inputElem = screen.getByRole('spinbutton', {
     name: /valor da despesa:/i,
   });
-  fireEvent.change(inputElem, { target: { value: 12 } });
+  fireEvent.click(inputElem, { target: { value: 12 } });
   expect(inputElem).toHaveValue(12);
+
+  const DescriçãoDespesa = screen.getByRole('textbox', {
+    name: /descrição da despesa:/i,
+  });
+  userEvent.type(DescriçãoDespesa, 'maça');
+  const tag = (screen.getByRole('option', { name: 'Dinheiro' }).selected);
+  screen.findAllByTestId('tag-input');
+
+  const buttonAdicionar = screen.getByRole('button', {
+    name: /adicionar despesa/i,
+  });
+  userEvent.click(buttonAdicionar);
+  await waitFor(() => {
+    expect(inputElem).toBeInTheDocument(12);
+    expect(DescriçãoDespesa).toBeInTheDocument('maça');
+    expect(tag).toBe(true);
+    const buttonExcluir = getByTestId('delete-btn');
+    userEvent.click(buttonExcluir);
+  });
+});
+test('teste a table ', () => {
+  renderWithRouterAndRedux(<WalletForm />);
+
+  const tableMoeda = screen.getByRole('columnheader', {
+    name: /moeda de conversão/i,
+  });
+  expect(tableMoeda).toBeInTheDocument();
+});
+test('teste se o email aparece ', () => {
+  renderWithRouterAndRedux(<Header />);
+
+  const email = screen.getByTestId('email-field');
+  expect(email).toBeInTheDocument();
 });

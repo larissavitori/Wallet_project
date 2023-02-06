@@ -22,7 +22,6 @@ test('teste se o input recebe o email', () => {
   });
 
   fireEvent.change(inputElem, { target: { value: 'userla@gmail.com' } });
-
   expect(inputElem).toHaveValue('userla@gmail.com');
   const button = screen.getAllByRole('button', { name: /entrar/i });
   expect(button).toBeDefined();
@@ -40,6 +39,8 @@ test(' teste se o botão é clicado quando digitar email e senha', () => {
   userEvent.type(inputSenha, 12345678);
   const buttonElem = screen.getByRole('button', { name: /entrar/i });
   userEvent.click(buttonElem);
+  userEvent.type(inputElem, 'usergmail.com');
+  expect(buttonElem).toBeDisabled();
 
   const carteira = '/carteira';
   act(() => {
