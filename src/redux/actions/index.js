@@ -24,7 +24,7 @@ export const formrequest = (payload, state) => ({
   type: FORM_REQUEST,
   payload: { ...state, exchangeRates: payload },
 });
-export const deleteRegister = (id) => ({ type: DELETE_REGISTER, payload: id });
+export const deleteRegister = (payload) => ({ type: DELETE_REGISTER, payload });
 
 export const failedRequest = (error) => ({
   type: FAILED_REQUEST, payload: error,
