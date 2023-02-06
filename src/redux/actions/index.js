@@ -3,6 +3,7 @@ export const ADD_EMAIL = 'ADD_EMAIL';
 export const REQUEST_API = 'REQUEST_API';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
 export const FORM_REQUEST = 'FORM_REQUEST';
+export const DELETE_REGISTER = 'DELETE_REGISTER';
 
 /* export const addEmail = (email) => ({
   type: ADD_EMAIL,
@@ -23,6 +24,7 @@ export const formrequest = (payload, state) => ({
   type: FORM_REQUEST,
   payload: { ...state, exchangeRates: payload },
 });
+export const deleteRegister = (id) => ({ type: DELETE_REGISTER, payload: id });
 
 export const failedRequest = (error) => ({
   type: FAILED_REQUEST, payload: error,

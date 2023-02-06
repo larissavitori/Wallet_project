@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Header extends Component {
+  resultHeader = () => {
+    const { expenses } = this.props;
+    const soma = expenses.reduce(
+      (acc, despesa) => {
+        const result = parseFloat(acc) + (Number(despesa.value)
+        * Number(despesa.exchangeRates[despesa.currency].ask));
+        return result.toFixed(2);
+      },
+      '0.00',
+    );
+    return soma;
+  };
+
   render() {
-    const { email, expenses } = this.props;
-    const soma = expenses.reduce((acc, despesa) => (
-      acc + (Number(despesa.value)
-       * Number(despesa.exchangeRates[despesa.currency]
-         .ask))
-    ), 0);
+    const { email } = this.props;
     return (
       <section>
         <div>Header</div>
@@ -19,7 +27,7 @@ class Header extends Component {
         </div>
         <p>despesa total:</p>
         <div data-testid="total-field">
-          { soma.toFixed(2)}
+          { this.resultHeader() }
         </div>
         <div data-testid="header-currency-field">
           BRL
