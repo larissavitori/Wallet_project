@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addEmail } from '../redux/actions';
+import logo from '../img/logoTrybeWallet.png';
+import './Login.css';
+import './button.css';
 
 class Login extends React.Component {
   constructor() {
@@ -39,13 +42,17 @@ class Login extends React.Component {
   render() {
     const { email, isbutton } = this.state;
     return (
-      <section>
-        <div> Tela De Login</div>
-        <form>
+      <div className="main-container">
+        <form className="login-container">
+          <img
+            src={ logo }
+            alt="logo trybe "
+            className="trybeImage"
+          />
           <label htmlFor="email">
-            Email:
             <input
               data-testid="email-input"
+              placeholder="Email"
               id="email"
               type="text"
               name="email"
@@ -55,9 +62,9 @@ class Login extends React.Component {
           </label>
 
           <label htmlFor="number">
-            password:
             <input
               data-testid="password-input"
+              placeholder="senha"
               id="number"
               type="password"
               name="senha"
@@ -65,6 +72,7 @@ class Login extends React.Component {
             />
           </label>
           <button
+            className="primary button"
             onClick={ this.handleClick }
             type="button"
             disabled={ isbutton }
@@ -72,7 +80,7 @@ class Login extends React.Component {
             entrar
           </button>
         </form>
-      </section>
+      </div>
     );
   }
 }

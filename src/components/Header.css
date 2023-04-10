@@ -1,0 +1,17 @@
+.header-container{
+  align-items: center;
+  background-color: white;
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  padding: 40px 100px;
+  position: absolute;
+  top: 0;
+  width: 80%;
+}
+.header-container, .header-wrapper {
+  align-items: center;
+  display: flex;
+  gap: 13px;
+}
+

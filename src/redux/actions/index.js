@@ -24,10 +24,14 @@ export const formrequest = (payload, state) => ({
   type: FORM_REQUEST,
   payload: { ...state, exchangeRates: payload },
 });
-export const deleteRegister = (payload) => ({ type: DELETE_REGISTER, payload });
+export const deleteRegister = (payload) => ({
+  type: DELETE_REGISTER,
+  payload,
+});
 
 export const failedRequest = (error) => ({
-  type: FAILED_REQUEST, payload: error,
+  type: FAILED_REQUEST,
+  payload: error,
 });
 
 export const apiFetch = (state) => async (dispatch) => {

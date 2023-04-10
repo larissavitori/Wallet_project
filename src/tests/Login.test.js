@@ -7,7 +7,7 @@ import Login from '../pages/Login';
 import App from '../App';
 
 test('Teste se a página contém as informações', () => {
-  renderWithRouterAndRedux(<App />);
+  renderWithRouterAndRedux(<App />, {}, '/carteira');
   const text1 = screen.getByText(/Hello, TrybeWallet!/i);
   expect(text1).toBeInTheDocument();
   const text2 = screen.getByText(/Tela De Login/i);

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { apiRequest, apiFetch } from '../redux/actions';
 import Table from './Table';
+import './Header.css';
 
 const INITIAL_STATE = {
   id: 0,
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
   method: 'Dinheiro',
   tag: 'Alimentação',
 };
+
 class WalletForm extends Component {
   state = INITIAL_STATE;
 

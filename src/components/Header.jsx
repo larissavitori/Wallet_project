@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import logo from '../img/logoTrybeWallet.png';
+import logoEmail from '../img/emaill.png';
+import moeda from '../img/moeda.png';
+import './Header.css';
 
 class Header extends Component {
   resultHeader = () => {
@@ -19,20 +23,36 @@ class Header extends Component {
   render() {
     const { email } = this.props;
     return (
-      <section>
-        <div>Header</div>
-        <div data-testid="email-field">
-          email:
-          { email }
+      <header>
+        <div className="header-container">
+          <div className="header-wrapper">
+            <img
+              src={ logo }
+              alt="logo trybe "
+              className="imageheader"
+            />
+            <img
+              src={ moeda }
+              alt="moeda logo"
+            />
+            <div data-testid="total-field">
+              Total de despesa:
+              { this.resultHeader() }
+            </div>
+            <div data-testid="header-currency-field">
+              BRL
+            </div>
+            <img
+              src={ logoEmail }
+              alt="logo email "
+            />
+            <div data-testid="email-field">
+              email:
+              { email }
+            </div>
+          </div>
         </div>
-        <p>despesa total:</p>
-        <div data-testid="total-field">
-          { this.resultHeader() }
-        </div>
-        <div data-testid="header-currency-field">
-          BRL
-        </div>
-      </section>
+      </header>
     );
   }
 }
